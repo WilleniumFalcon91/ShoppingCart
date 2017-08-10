@@ -28,6 +28,16 @@ class Customer {
             ('${this.name}', '${this.email}', '${this.address}', '${this.password}');
         `);
     }
+    get(id) {
+        return this.db.one(`
+            select name, email, address from customers where customer_id=${id};
+        `).then((result) => {
+            this.name = result.name;
+            this.email = result.email;
+            this.address = result.address;
+            return result;
+        })
+    }
 }
 
 module.exports = Customer;
