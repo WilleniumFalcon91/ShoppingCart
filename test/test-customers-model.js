@@ -36,4 +36,21 @@ describe('Customers', () => {
                     });
             });
     });
+    it('should have a customer_id when we retrieve from db', (done) => {
+        let data = ['Will', 'will@willsworld.com', 'Wills World', "Woohoo!"];
+        let c1 = new Customer(...data);
+        c1.save()
+            .then((result) => {
+                let customer_id = result.customer_id;
+                Customer.get(customer_id)
+                    .then((c2) => {
+                      expect(c2.customer_id).to.equal(customer_id);
+                        done();
+                    })
+                    .catch(console.log);
+            });
+    })
+    // it('should update a user and retain the new values', (done) => {
+
+    // })
 });
