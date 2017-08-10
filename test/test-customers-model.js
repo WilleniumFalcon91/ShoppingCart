@@ -50,7 +50,24 @@ describe('Customers', () => {
                     .catch(console.log);
             });
     })
-    // it('should update a user and retain the new values', (done) => {
-
-    // })
+    it('should update a user and retain the new values', (done) => {
+        let newName = 'oakley';
+        let data = ['Will', 'will@willsworld.com', 'Wills World', "Woohoo!"];
+        let c1 = new Customer(...data);
+        c1.save()
+            .then((resultFromSave1) => {
+                c1.customer_id = resultFromSave1.customer_id;
+                c1.name = newName;
+                c1.save()
+                    .then((resultFromSave2) => {
+                        let customer_id = resultFromSave1.customer_id;
+                        Customer.get(customer_id)
+                            .then((c2) => {
+                                expect(c2.name).to.equal(newName);
+                                done();
+                            })
+                            .catch(console.log);
+                    });
+            })
+    })
 });
