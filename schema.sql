@@ -1,7 +1,7 @@
 create table customers (
     customer_id serial primary key, 
     name varchar (100) not null, 
-    email varchar (200) unique not null,
+    email varchar (200)  not null,
     address varchar (300) not null,
     password varchar (50) not null
 );
